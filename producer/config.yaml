@@ -1,0 +1,6 @@
+kafka:
+  bootstrap_servers: "127.0.0.1:9092"
+  topic: "transactions"
+
+generator:
+  interval_sec: 1

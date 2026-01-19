@@ -2,7 +2,7 @@
 SELECT
     date_trunc('hour', event_time) AS hour,
     COUNT(*) AS transaction_count
-FROM transactions
+FROM transactions_clean
 GROUP BY 1
 ORDER BY 1;
 
@@ -10,7 +10,7 @@ ORDER BY 1;
 SELECT
     date_trunc('hour', event_time) AS hour,
     SUM(amount) AS total_amount
-FROM transactions
+FROM transactions_clean
 GROUP BY 1
 ORDER BY 1;
 
@@ -19,7 +19,7 @@ SELECT
     user_id,
     COUNT(*) AS nb_transactions,
     SUM(amount) AS total_spent
-FROM transactions
+FROM transactions_clean
 GROUP BY user_id
 ORDER BY total_spent DESC
 LIMIT 10;
@@ -27,7 +27,7 @@ LIMIT 10;
 -- KPI 4: Late events detection (>2 minutes)
 SELECT
     COUNT(*) AS late_events
-FROM transactions
+FROM transactions_clean
 WHERE processing_time - event_time > INTERVAL '2 minutes';
 
 SELECT
@@ -35,7 +35,7 @@ SELECT
     event_time,
     processing_time,
     processing_time - event_time AS delay
-FROM transactions
+FROM transactions_clean
 WHERE processing_time - event_time > INTERVAL '2 minutes'
 ORDER BY delay DESC;
 
@@ -47,7 +47,7 @@ SELECT
         ORDER BY event_time
         ROWS BETWEEN 500 PRECEDING AND CURRENT ROW
     ) AS rolling_avg_5
-FROM transactions
+FROM transactions_clean
 ORDER BY event_time;
 
 -- Verify transformed table transformations_clean

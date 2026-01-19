@@ -2,6 +2,7 @@ import json
 import yaml
 from kafka import KafkaConsumer
 from transform import transform_event
+from postgres_writer import PostgresWriter
 
 
 def load_config():
@@ -11,6 +12,7 @@ def load_config():
 
 def main():
     config = load_config()
+    pg_writer = PostgresWriter()
 
     consumer = KafkaConsumer(
         config["kafka"]["topic"],
@@ -31,7 +33,8 @@ def main():
             print("Invalid event skipped:", raw_event)
             continue
 
-        print("Processed event:", transformed_event)
+        pg_writer.insert_transaction(transformed_event)
+        print("Inserted event:", transformed_event)
 
 
 if __name__ == "__main__":

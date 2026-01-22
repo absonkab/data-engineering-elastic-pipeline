@@ -82,8 +82,13 @@ services:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:admin@postgres:5432/data_pipeline
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__WEBSERVER__SECRET_KEY: local-test-secret-key
     volumes:
       - ./airflow/dags:/opt/airflow/dags
+      - ./consumer:/opt/airflow/consumer
+      - ./elastic:/opt/airflow/elastic
+      - ./producer:/opt/airflow/producer
+      - ./sql:/opt/airflow/sql
       - ./airflow/requirements.txt:/requirements.txt
     ports:
       - "8080:8080"
@@ -107,8 +112,13 @@ services:
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:admin@postgres:5432/data_pipeline
+      AIRFLOW__WEBSERVER__SECRET_KEY: local-test-secret-key
     volumes:
       - ./airflow/dags:/opt/airflow/dags
+      - ./consumer:/opt/airflow/consumer
+      - ./elastic:/opt/airflow/elastic
+      - ./producer:/opt/airflow/producer
+      - ./sql:/opt/airflow/sql
       - ./airflow/requirements.txt:/requirements.txt
     command: >
       bash -c "pip install -r /requirements.txt &&

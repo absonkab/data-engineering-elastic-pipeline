@@ -1,7 +1,8 @@
 from datetime import datetime
+from typing import Optional, Dict
 
 
-def transform_event(event: dict) -> dict | None:
+def transform_event(event: dict) -> Optional[Dict]:
     """
     Clean and enrich a raw Kafka event.
     Returns None if the event is invalid.

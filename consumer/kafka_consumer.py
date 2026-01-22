@@ -6,7 +6,7 @@ from postgres_writer import PostgresWriter
 
 
 def load_config():
-    with open("config.yaml") as f:
+    with open("/opt/airflow/config.yaml") as f:
         return yaml.safe_load(f)
 
 

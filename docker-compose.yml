@@ -89,6 +89,7 @@ services:
       - ./elastic:/opt/airflow/elastic
       - ./producer:/opt/airflow/producer
       - ./sql:/opt/airflow/sql
+      - ./config.yaml:/opt/airflow/config.yaml
       - ./airflow/requirements.txt:/requirements.txt
     ports:
       - "8080:8080"
@@ -119,6 +120,7 @@ services:
       - ./elastic:/opt/airflow/elastic
       - ./producer:/opt/airflow/producer
       - ./sql:/opt/airflow/sql
+      - ./config.yaml:/opt/airflow/config.yaml
       - ./airflow/requirements.txt:/requirements.txt
     command: >
       bash -c "pip install -r /requirements.txt &&

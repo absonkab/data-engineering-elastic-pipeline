@@ -1,14 +1,25 @@
+import os
 import psycopg2
 
 
 class PostgresWriter:
     def __init__(self):
+        # postgres credentials for local env
+        # self.conn = psycopg2.connect(
+        #     host="localhost",
+        #     port=5432,
+        #     dbname="data_pipeline",
+        #     user="admin",
+        #     password="admin",
+        # )
+        
+        # postgres credentials for docker env
         self.conn = psycopg2.connect(
-            host="localhost",
-            port=5432,
-            dbname="data_pipeline",
-            user="admin",
-            password="admin",
+            host=os.getenv("POSTGRES_HOST"),
+            port=os.getenv("POSTGRES_PORT"),
+            dbname=os.getenv("POSTGRES_DB"),
+            user=os.getenv("POSTGRES_USER"),
+            password=os.getenv("POSTGRES_PASSWORD"),
         )
         self.conn.autocommit = True
 

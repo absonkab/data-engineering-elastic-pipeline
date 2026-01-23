@@ -88,6 +88,7 @@ services:
       POSTGRES_DB: data_pipeline
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./consumer:/opt/airflow/consumer
@@ -124,6 +125,7 @@ services:
       POSTGRES_DB: data_pipeline
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./consumer:/opt/airflow/consumer

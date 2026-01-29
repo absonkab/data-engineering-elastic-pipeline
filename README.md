@@ -174,7 +174,7 @@ This guarantees:
   --role Admin \
   --email admin@example.com
 
-## 4. Log in airflow web page as admin and create Postgres connection on airflow:
+### 4. Log in airflow web page as admin and create Postgres connection on airflow:
 | field     | Value            |
 | --------- | ---------------- |
 | Conn Id   | postgres_default |

@@ -1,6 +1,4 @@
-# Real-Time Data Engineering & Observability Pipeline
-
-# Kafka → Postgres → Elasticsearch Data Pipeline
+# Real-Time Data Engineering & Observability
 
 ## Overview
 

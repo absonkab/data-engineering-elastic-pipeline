@@ -22,9 +22,12 @@ with DAG(
     description="Consume Kafka events, clean data and build analytics tables",
     default_args=default_args,
     start_date=datetime(2026, 1, 1),
-    schedule_interval="@hourly",
+    # schedule_interval="@hourly",    # run every hour
+    # schedule_interval="* * * * *",   # run every min
+    schedule_interval="*/5 * * * *",   # run every 5 min
     catchup=False,
-    tags=["kafka", "postgres", "etl"],
+    template_searchpath="/opt/airflow/sql",
+    tags=["kafka", "postgres", "streaming", "etl"],
 ) as dag:
 
     # 1️ Consume Kafka and write to Postgres (raw ingestion)
@@ -37,14 +40,15 @@ with DAG(
     run_transformations = PostgresOperator(
         task_id="run_transformations",
         postgres_conn_id="postgres_default",
-        sql="/opt/airflow/sql/transformations.sql",
+        # sql=open("/opt/airflow/sql/transformations.sql").read(), # test if the file is readable
+        sql="transformations.sql",
     )
 
     # 3️ Refresh analytics views
     refresh_views = PostgresOperator(
         task_id="refresh_views",
         postgres_conn_id="postgres_default",
-        sql="/opt/airflow/sql/views.sql",
+        sql="views.sql",
     )
 
     # ------------------------

@@ -159,10 +159,13 @@ This guarantees:
 
 ### 1. Start services via Docker Compose
 ### 2. create table transactions in postgres: 
+```
 - windows: Get-Content sql/schema.sql | docker exec -i postgres psql -U admin -d data_pipeline
 - linux: docker exec -i postgres psql -U admin -d data_pipeline < sql/schema.sql
+```
 
 ### 3. manually create airflow user if it is not done during docker compose running:
+```
 - docker exec -it airflow-webserver bash
 - airflow users create \
   --username admin \
@@ -171,6 +174,7 @@ This guarantees:
   --lastname User \
   --role Admin \
   --email admin@example.com
+  ```
 
 ### 4. Log in airflow web page as admin and create Postgres connection on airflow:
 | field     | Value            |

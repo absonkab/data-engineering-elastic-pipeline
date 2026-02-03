@@ -40,6 +40,12 @@ Elasticsearch (hourly_metrics index)
 Kibana (metrics visualisation)
 ```
 
+## 🐳 Infrastructure (Docker)
+
+All components of the data platform run in Docker containers.
+
+![Docker Services](docs/Docker_containers.png)
+
 ---
 
 ## Data Model
@@ -95,6 +101,21 @@ Indexes are created on:
 
 * Default: `@hourly`
 * Configurable via `schedule_interval`
+
+**DAG ID:** `index_hourly_metrics_to_elasticsearch`
+
+### Schedule
+
+* Default: `@hourly`
+* Configurable via `schedule_interval`
+
+### Pipeline Orchestration (Airflow)
+
+The data pipeline is orchestrated using Apache Airflow.  
+Below is the DAG running successfully with all tasks completed.
+
+![Airflow DAG](docs/Airflow_dags.png)
+
 
 ### Tasks
 
@@ -153,6 +174,12 @@ This guarantees:
 * Detect processing latency issues
 * Track late event ratios
 * Build Kibana dashboards for real-time analytics
+
+## 📊 Analytics & Monitoring (Kibana)
+
+Aggregated hourly metrics indexed in Elasticsearch and visualized in Kibana.
+
+![Kibana Dashboard](docs/kibana_dashboard.png)
 
 ---
 
